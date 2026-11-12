@@ -1,0 +1,732 @@
+<html>
+<head>
+    <style>
+        body {
+            background-color: var(--fond-page);
+        }
+        .compteurRouge {
+            position: fixed;
+            color: var(--text-color);
+            font-weight: bold;
+            left: 165px;
+        }
+        .compteurVert {
+            position: fixed;
+            color: var(--text-color);
+            font-weight: bold;
+            left: 270px;
+        }
+        .moinsRouge {
+            background-color: red;
+            border: 3px solid brown;
+            color: var(--text-color);
+            border-radius: 30px;
+            width: 30px;
+            height: 20px;
+            position: fixed;
+            left: 130px;
+            cursor: pointer;
+        }
+        .plusRouge {
+            background-color: greenyellow;
+            border: 3px solid darkgreen;
+            color: var(--text-color);
+            border-radius: 30px;
+            width: 30px;
+            height: 20px;
+            position: fixed;
+            left: 180px;
+            cursor: pointer;
+        }
+        .moinsVert {
+            background-color: red;
+            border: 3px solid brown;
+            color: var(--text-color);
+            border-radius: 30px;
+            width: 30px;
+            height: 20px;
+            position: fixed;
+            left: 230px;
+            cursor: pointer;
+        }
+        #points {
+            position: fixed;
+            left: 150px;
+            top: 17px;
+            font-weight: bold;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .plusVert {
+            background-color: greenyellow;
+            border: 3px solid green;
+            color: var(--text-color);
+            border-radius: 30px;
+            width: 30px;
+            height: 20px;
+            position: fixed;
+            left: 290px;
+            cursor: pointer;
+        }
+        .sombre {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            background-color: var(--input-bg);
+            border: 3px solid var(--input-border);
+            border-radius: 10px;
+            padding: 10px 15px;
+            font-size: 15px;
+            cursor: pointer;
+            color: var(--text-color);
+            font-weight: bold;
+        }
+        #prenoms {
+            font-size: 15px;
+            position: fixed;
+            top: 5px;
+            color: var(--text-color);
+            flex-direction: column;
+            display: flex;
+            background-color: var(--bg-color);
+            border: 5px solid var(--input-border);
+            border-radius: 30px;
+            padding: 30px 20px;
+            gap: 0px;
+            margin: 5px;
+            height: 500px;
+            width: 335px;
+        }
+        .plusVert:hover {
+            background-color: rgb(140, 201, 49); 
+        }
+        .plusVert:active {
+            background-color: lightgreen;
+            color: var(--text-color);
+        }
+        .moinsVert:hover {
+            background-color: orangered; 
+        }
+        .moinsVert:active {
+            background-color: salmon;
+            color: var(--text-color);
+        }
+        .plusRouge:hover {
+            background-color: rgb(140, 201, 49); 
+        }
+        .plusRouge:active {
+            background-color: lightgreen;
+            color: var(--text-color);
+        }
+        .moinsRouge:hover {
+            background-color: orangered; 
+        }
+        .moinsRouge:active {
+            background-color: salmon;
+            color: var(--text-color);
+        }
+        body.dark {
+            --bg-color: #1a1a1a;
+            --card-bg: #2d2d2d;
+            --text-color: rgb(255, 255, 255);
+            --input-bg: #3a3a3a;
+            --input-border: gray;
+            --fond-page: rgb(49, 49, 49);
+            --button-color: rgb(49, 49, 49);
+            --button-hover: rgb(168, 165, 165);
+            --title-color: white;
+        }
+        :root {
+            --fond-page: bisque;
+            --text-color: black;
+            --bg-color: white;
+            --card-bg: rgb(255, 255, 255);
+            --button-color: rgb(49, 49, 49);
+            --input-bg: rgb(255, 255, 255);
+            --input-border: orange;
+            --button-hover: bisque;
+            --title-color: orange;
+        }
+        #points-rouges {
+            font-weight: bold;
+            position: fixed;
+            left: 130px;
+            top: 20px;
+        }
+        #points-verts {
+            font-weight: bold;
+            position: fixed;
+            left: 240px;
+            top: 20px;
+        }
+    </style>
+    <script>
+        let etatSombre = localStorage.getItem("etatSombre") || "off";
+        let vertLivia = Number(localStorage.getItem("vertLivia")) || 0;
+        let rougeLivia = Number(localStorage.getItem("rougeLivia")) || 0;
+        let vertAbdelJalil = Number(localStorage.getItem("vertAbdelJalil")) || 0;
+        let rougeAbdelJalil = Number(localStorage.getItem("rougeAbdelJalil")) || 0;
+        let vertRayan = Number(localStorage.getItem("vertRayan")) || 0;
+        let rougeRayan = Number(localStorage.getItem("rougeRayan")) || 0;
+        let vertDamien = Number(localStorage.getItem("vertDamien")) || 0;
+        let rougeDamien = Number(localStorage.getItem("rougeDamien")) || 0;
+        let vertAmine = Number(localStorage.getItem("vertAmine")) || 0;
+        let rougeAmine = Number(localStorage.getItem("rougeAmine")) || 0;
+        let vertChloe = Number(localStorage.getItem("vertChloe")) || 0;
+        let rougeChloe = Number(localStorage.getItem("rougeChloe")) || 0;
+        let vertSkander = Number(localStorage.getItem("vertSkander")) || 0;
+        let rougeSkander = Number(localStorage.getItem("rougeSkander")) || 0;
+        let vertYasmine = Number(localStorage.getItem("vertYasmine")) || 0;
+        let rougeYasmine = Number(localStorage.getItem("rougeYasmine")) || 0;
+        let vertStella = Number(localStorage.getItem("vertStella")) || 0;
+        let rougeStella = Number(localStorage.getItem("rougeStella")) || 0;
+        let vertCorentin = Number(localStorage.getItem("vertCorentin")) || 0;
+        let rougeCorentin = Number(localStorage.getItem("rougeCorentin")) || 0;
+        let vertEma = Number(localStorage.getItem("vertEma")) || 0;
+        let rougeEma = Number(localStorage.getItem("rougeEma")) || 0;
+        let vertMamadou = Number(localStorage.getItem("vertMamadou")) || 0;
+        let rougeMamadou = Number(localStorage.getItem("rougeMamadou")) || 0;
+        let vertMarieLiesse = Number(localStorage.getItem("vertMarieLiesse")) || 0;
+        let rougeMarieLiesse = Number(localStorage.getItem("rougeMarieLiesse")) || 0;
+        let vertJules = Number(localStorage.getItem("vertJules")) || 0;
+        let rougeJules = Number(localStorage.getItem("rougeJules")) || 0;
+        let vertTim = Number(localStorage.getItem("vertTim")) || 0;
+        let rougeTim = Number(localStorage.getItem("rougeTim")) || 0;
+        let vertTheo = Number(localStorage.getItem("vertTheo")) || 0;
+        let rougeTheo = Number(localStorage.getItem("rougeTheo")) || 0;
+        let vertLaïna = Number(localStorage.getItem("vertLaïna")) || 0;
+        let rougeLaïna = Number(localStorage.getItem("rougeLaïna")) || 0;
+        let vertHadia = Number(localStorage.getItem("vertHadia")) || 0;
+        let rougeHadia = Number(localStorage.getItem("rougeHadia")) || 0;
+        let vertAldric = Number(localStorage.getItem("vertAldric")) || 0;
+        let rougeAldric = Number(localStorage.getItem("rougeAldric")) || 0;
+        let vertCélian = Number(localStorage.getItem("vertCélian")) || 0;
+        let rougeCélian = Number(localStorage.getItem("rougeCélian")) || 0;
+        let vertIbrahim = Number(localStorage.getItem("vertIbrahim")) || 0;
+        let rougeIbrahim = Number(localStorage.getItem("rougeIbrahim")) || 0;
+        let vertHanna = Number(localStorage.getItem("vertHanna")) || 0;
+        let rougeHanna = Number(localStorage.getItem("rougeHanna")) || 0;
+        let vertVictor = Number(localStorage.getItem("vertVictor")) || 0;
+        let rougeVictor = Number(localStorage.getItem("rougeVictor")) || 0;
+        let vertLéon = Number(localStorage.getItem("vertLéon")) || 0;
+        let rougeLéon = Number(localStorage.getItem("rougeLéon")) || 0;
+        let vertNoah = Number(localStorage.getItem("vertNoah")) || 0;
+        let rougeNoah = Number(localStorage.getItem("rougeNoah")) || 0;
+        let vertAntonin = Number(localStorage.getItem("vertAntonin")) || 0;
+        let rougeAntonin = Number(localStorage.getItem("rougeAntonin")) || 0;
+        let vertLéa = Number(localStorage.getItem("vertLéa")) || 0;
+        let rougeLéa = Number(localStorage.getItem("rougeLéa")) || 0;
+        let vertBocar = Number(localStorage.getItem("vertBocar")) || 0;
+        let rougeBocar = Number(localStorage.getItem("rougeBocar")) || 0;
+        let vertMila = Number(localStorage.getItem("vertMila")) || 0;
+        let rougeMila = Number(localStorage.getItem("rougeMila")) || 0;
+        let vertLina = Number(localStorage.getItem("vertLina")) || 0;
+        let rougeLina = Number(localStorage.getItem("rougeLina")) || 0;
+
+        window.onload = function() {
+            if (etatSombre === "on") {
+                document.body.classList.add("dark");
+            }
+            document.getElementById("vert-livia").innerText = vertLivia;
+            document.getElementById("rouge-livia").innerText = rougeLivia;
+            document.getElementById("vert-abdeljalil").innerText = vertAbdelJalil;
+            document.getElementById("rouge-abdeljalil").innerText = rougeAbdelJalil;
+            document.getElementById("vert-rayan").innerText = vertRayan;
+            document.getElementById("rouge-rayan").innerText = rougeRayan;
+            document.getElementById("vert-damien").innerText = vertDamien;
+            document.getElementById("rouge-damien").innerText = rougeDamien;
+            document.getElementById("vert-amine").innerText = vertAmine;
+            document.getElementById("rouge-amine").innerText = rougeAmine;
+            document.getElementById("vert-chloe").innerText = vertChloe;
+            document.getElementById("rouge-chloe").innerText = rougeChloe;
+            document.getElementById("vert-skander").innerText = vertSkander;
+            document.getElementById("rouge-skander").innerText = rougeSkander;
+            document.getElementById("vert-yasmine").innerText = vertYasmine;
+            document.getElementById("rouge-yasmine").innerText = rougeYasmine;
+            document.getElementById("vert-stella").innerText = vertStella;
+            document.getElementById("rouge-stella").innerText = rougeStella;
+            document.getElementById("vert-corentin").innerText = vertCorentin;
+            document.getElementById("rouge-corentin").innerText = rougeCorentin;
+            document.getElementById("vert-ema").innerText = vertEma;
+            document.getElementById("rouge-ema").innerText = rougeEma;
+            document.getElementById("vert-mamadou").innerText = vertMamadou;
+            document.getElementById("rouge-mamadou").innerText = rougeMamadou;
+            document.getElementById("vert-marieliesse").innerText = vertMarieLiesse;
+            document.getElementById("rouge-marieliesse").innerText = rougeMarieLiesse;
+            document.getElementById("vert-jules").innerText = vertJules;
+            document.getElementById("rouge-jules").innerText = rougeJules;
+            document.getElementById("vert-tim").innerText = vertTim;
+            document.getElementById("rouge-tim").innerText = rougeTim;
+            document.getElementById("vert-theo").innerText = vertTheo;
+            document.getElementById("rouge-theo").innerText = rougeTheo;
+            document.getElementById("vert-laïna").innerText = vertLaïna;
+            document.getElementById("rouge-laïna").innerText = rougeLaïna;
+            document.getElementById("vert-hadia").innerText = vertHadia;
+            document.getElementById("rouge-hadia").innerText = rougeHadia;
+            document.getElementById("vert-aldric").innerText = vertAldric;
+            document.getElementById("rouge-aldric").innerText = rougeAldric;
+            document.getElementById("vert-célian").innerText = vertCélian;
+            document.getElementById("rouge-célian").innerText = rougeCélian;
+            document.getElementById("vert-ibrahim").innerText = vertIbrahim;
+            document.getElementById("rouge-ibrahim").innerText = rougeIbrahim;
+            document.getElementById("vert-hanna").innerText = vertHanna;
+            document.getElementById("rouge-hanna").innerText = rougeHanna;
+            document.getElementById("vert-victor").innerText = vertVictor;
+            document.getElementById("rouge-victor").innerText = rougeVictor;
+            document.getElementById("vert-léon").innerText = vertLéon;
+            document.getElementById("rouge-léon").innerText = rougeLéon;
+            document.getElementById("vert-noah").innerText = vertNoah;
+            document.getElementById("rouge-noah").innerText = rougeNoah;
+            document.getElementById("vert-antonin").innerText = vertAntonin;
+            document.getElementById("rouge-antonin").innerText = rougeAntonin;
+            document.getElementById("vert-léa").innerText = vertLéa;
+            document.getElementById("rouge-léa").innerText = rougeLéa;
+            document.getElementById("vert-bocar").innerText = vertBocar;
+            document.getElementById("rouge-bocar").innerText = rougeBocar;
+            document.getElementById("vert-mila").innerText = vertMila;
+            document.getElementById("rouge-mila").innerText = rougeMila;
+            document.getElementById("vert-lina").innerText = vertLina;
+            document.getElementById("rouge-lina").innerText = rougeLina;
+        };
+
+        function plusVertLivia() { vertLivia += 1; document.getElementById("vert-livia").innerText = vertLivia; localStorage.setItem("vertLivia", vertLivia); }
+        function moinsVertLivia() { vertLivia -= 1; document.getElementById("vert-livia").innerText = vertLivia; localStorage.setItem("vertLivia", vertLivia); }
+        function plusRougeLivia() { rougeLivia += 1; document.getElementById("rouge-livia").innerText = rougeLivia; localStorage.setItem("rougeLivia", rougeLivia); }
+        function moinsRougeLivia() { rougeLivia -= 1; document.getElementById("rouge-livia").innerText = rougeLivia; localStorage.setItem("rougeLivia", rougeLivia); }
+
+        function plusVertAbdelJalil() { vertAbdelJalil += 1; document.getElementById("vert-abdeljalil").innerText = vertAbdelJalil; localStorage.setItem("vertAbdelJalil", vertAbdelJalil); }
+        function moinsVertAbdelJalil() { vertAbdelJalil -= 1; document.getElementById("vert-abdeljalil").innerText = vertAbdelJalil; localStorage.setItem("vertAbdelJalil", vertAbdelJalil); }
+        function plusRougeAbdelJalil() { rougeAbdelJalil += 1; document.getElementById("rouge-abdeljalil").innerText = rougeAbdelJalil; localStorage.setItem("rougeAbdelJalil", rougeAbdelJalil); }
+        function moinsRougeAbdelJalil() { rougeAbdelJalil -= 1; document.getElementById("rouge-abdeljalil").innerText = rougeAbdelJalil; localStorage.setItem("rougeAbdelJalil", rougeAbdelJalil); }
+
+        function plusVertRayan() { vertRayan += 1; document.getElementById("vert-rayan").innerText = vertRayan; localStorage.setItem("vertRayan", vertRayan); }
+        function moinsVertRayan() { vertRayan -= 1; document.getElementById("vert-rayan").innerText = vertRayan; localStorage.setItem("vertRayan", vertRayan); }
+        function plusRougeRayan() { rougeRayan += 1; document.getElementById("rouge-rayan").innerText = rougeRayan; localStorage.setItem("rougeRayan", rougeRayan); }
+        function moinsRougeRayan() { rougeRayan -= 1; document.getElementById("rouge-rayan").innerText = rougeRayan; localStorage.setItem("rougeRayan", rougeRayan); }
+
+        function plusVertDamien() { vertDamien += 1; document.getElementById("vert-damien").innerText = vertDamien; localStorage.setItem("vertDamien", vertDamien); }
+        function moinsVertDamien() { vertDamien -= 1; document.getElementById("vert-damien").innerText = vertDamien; localStorage.setItem("vertDamien", vertDamien); }
+        function plusRougeDamien() { rougeDamien += 1; document.getElementById("rouge-damien").innerText = rougeDamien; localStorage.setItem("rougeDamien", rougeDamien); }
+        function moinsRougeDamien() { rougeDamien -= 1; document.getElementById("rouge-damien").innerText = rougeDamien; localStorage.setItem("rougeDamien", rougeDamien); }
+
+        function plusVertAmine() { vertAmine += 1; document.getElementById("vert-amine").innerText = vertAmine; localStorage.setItem("vertAmine", vertAmine); }
+        function moinsVertAmine() { vertAmine -= 1; document.getElementById("vert-amine").innerText = vertAmine; localStorage.setItem("vertAmine", vertAmine); }
+        function plusRougeAmine() { rougeAmine += 1; document.getElementById("rouge-amine").innerText = rougeAmine; localStorage.setItem("rougeAmine", rougeAmine); }
+        function moinsRougeAmine() { rougeAmine -= 1; document.getElementById("rouge-amine").innerText = rougeAmine; localStorage.setItem("rougeAmine", rougeAmine); }
+
+        function plusVertChloe() { vertChloe += 1; document.getElementById("vert-chloe").innerText = vertChloe; localStorage.setItem("vertChloe", vertChloe); }
+        function moinsVertChloe() { vertChloe -= 1; document.getElementById("vert-chloe").innerText = vertChloe; localStorage.setItem("vertChloe", vertChloe); }
+        function plusRougeChloe() { rougeChloe += 1; document.getElementById("rouge-chloe").innerText = rougeChloe; localStorage.setItem("rougeChloe", rougeChloe); }
+        function moinsRougeChloe() { rougeChloe -= 1; document.getElementById("rouge-chloe").innerText = rougeChloe; localStorage.setItem("rougeChloe", rougeChloe); }
+
+        function plusVertSkander() { vertSkander += 1; document.getElementById("vert-skander").innerText = vertSkander; localStorage.setItem("vertSkander", vertSkander); }
+        function moinsVertSkander() { vertSkander -= 1; document.getElementById("vert-skander").innerText = vertSkander; localStorage.setItem("vertSkander", vertSkander); }
+        function plusRougeSkander() { rougeSkander += 1; document.getElementById("rouge-skander").innerText = rougeSkander; localStorage.setItem("rougeSkander", rougeSkander); }
+        function moinsRougeSkander() { rougeSkander -= 1; document.getElementById("rouge-skander").innerText = rougeSkander; localStorage.setItem("rougeSkander", rougeSkander); }
+
+        function plusVertYasmine() { vertYasmine += 1; document.getElementById("vert-yasmine").innerText = vertYasmine; localStorage.setItem("vertYasmine", vertYasmine); }
+        function moinsVertYasmine() { vertYasmine -= 1; document.getElementById("vert-yasmine").innerText = vertYasmine; localStorage.setItem("vertYasmine", vertYasmine); }
+        function plusRougeYasmine() { rougeYasmine += 1; document.getElementById("rouge-yasmine").innerText = rougeYasmine; localStorage.setItem("rougeYasmine", rougeYasmine); }
+        function moinsRougeYasmine() { rougeYasmine -= 1; document.getElementById("rouge-yasmine").innerText = rougeYasmine; localStorage.setItem("rougeYasmine", rougeYasmine); }
+
+        function plusVertStella() { vertStella += 1; document.getElementById("vert-stella").innerText = vertStella; localStorage.setItem("vertStella", vertStella); }
+        function moinsVertStella() { vertStella -= 1; document.getElementById("vert-stella").innerText = vertStella; localStorage.setItem("vertStella", vertStella); }
+        function plusRougeStella() { rougeStella += 1; document.getElementById("rouge-stella").innerText = rougeStella; localStorage.setItem("rougeStella", rougeStella); }
+        function moinsRougeStella() { rougeStella -= 1; document.getElementById("rouge-stella").innerText = rougeStella; localStorage.setItem("rougeStella", rougeStella); }
+
+        function plusVertCorentin() { vertCorentin += 1; document.getElementById("vert-corentin").innerText = vertCorentin; localStorage.setItem("vertCorentin", vertCorentin); }
+        function moinsVertCorentin() { vertCorentin -= 1; document.getElementById("vert-corentin").innerText = vertCorentin; localStorage.setItem("vertCorentin", vertCorentin); }
+        function plusRougeCorentin() { rougeCorentin += 1; document.getElementById("rouge-corentin").innerText = rougeCorentin; localStorage.setItem("rougeCorentin", rougeCorentin); }
+        function moinsRougeCorentin() { rougeCorentin -= 1; document.getElementById("rouge-corentin").innerText = rougeCorentin; localStorage.setItem("rougeCorentin", rougeCorentin); }
+
+        function plusVertEma() { vertEma += 1; document.getElementById("vert-ema").innerText = vertEma; localStorage.setItem("vertEma", vertEma); }
+        function moinsVertEma() { vertEma -= 1; document.getElementById("vert-ema").innerText = vertEma; localStorage.setItem("vertEma", vertEma); }
+        function plusRougeEma() { rougeEma += 1; document.getElementById("rouge-ema").innerText = rougeEma; localStorage.setItem("rougeEma", rougeEma); }
+        function moinsRougeEma() { rougeEma -= 1; document.getElementById("rouge-ema").innerText = rougeEma; localStorage.setItem("rougeEma", rougeEma); }
+
+        function plusVertMamadou() { vertMamadou += 1; document.getElementById("vert-mamadou").innerText = vertMamadou; localStorage.setItem("vertMamadou", vertMamadou); }
+        function moinsVertMamadou() { vertMamadou -= 1; document.getElementById("vert-mamadou").innerText = vertMamadou; localStorage.setItem("vertMamadou", vertMamadou); }
+        function plusRougeMamadou() { rougeMamadou += 1; document.getElementById("rouge-mamadou").innerText = rougeMamadou; localStorage.setItem("rougeMamadou", rougeMamadou); }
+        function moinsRougeMamadou() { rougeMamadou -= 1; document.getElementById("rouge-mamadou").innerText = rougeMamadou; localStorage.setItem("rougeMamadou", rougeMamadou); }
+
+        function plusVertMarieLiesse() { vertMarieLiesse += 1; document.getElementById("vert-marieliesse").innerText = vertMarieLiesse; localStorage.setItem("vertMarieLiesse", vertMarieLiesse); }
+        function moinsVertMarieLiesse() { vertMarieLiesse -= 1; document.getElementById("vert-marieliesse").innerText = vertMarieLiesse; localStorage.setItem("vertMarieLiesse", vertMarieLiesse); }
+        function plusRougeMarieLiesse() { rougeMarieLiesse += 1; document.getElementById("rouge-marieliesse").innerText = rougeMarieLiesse; localStorage.setItem("rougeMarieLiesse", rougeMarieLiesse); }
+        function moinsRougeMarieLiesse() { rougeMarieLiesse -= 1; document.getElementById("rouge-marieliesse").innerText = rougeMarieLiesse; localStorage.setItem("rougeMarieLiesse", rougeMarieLiesse); }
+
+        function plusVertJules() { vertJules += 1; document.getElementById("vert-jules").innerText = vertJules; localStorage.setItem("vertJules", vertJules); }
+        function moinsVertJules() { vertJules -= 1; document.getElementById("vert-jules").innerText = vertJules; localStorage.setItem("vertJules", vertJules); }
+        function plusRougeJules() { rougeJules += 1; document.getElementById("rouge-jules").innerText = rougeJules; localStorage.setItem("rougeJules", rougeJules); }
+        function moinsRougeJules() { rougeJules -= 1; document.getElementById("rouge-jules").innerText = rougeJules; localStorage.setItem("rougeJules", rougeJules); }
+
+        function plusVertTim() { vertTim += 1; document.getElementById("vert-tim").innerText = vertTim; localStorage.setItem("vertTim", vertTim); }
+        function moinsVertTim() { vertTim -= 1; document.getElementById("vert-tim").innerText = vertTim; localStorage.setItem("vertTim", vertTim); }
+        function plusRougeTim() { rougeTim += 1; document.getElementById("rouge-tim").innerText = rougeTim; localStorage.setItem("rougeTim", rougeTim); }
+        function moinsRougeTim() { rougeTim -= 1; document.getElementById("rouge-tim").innerText = rougeTim; localStorage.setItem("rougeTim", rougeTim); }
+
+        function plusVertTheo() { vertTheo += 1; document.getElementById("vert-theo").innerText = vertTheo; localStorage.setItem("vertTheo", vertTheo); }
+        function moinsVertTheo() { vertTheo -= 1; document.getElementById("vert-theo").innerText = vertTheo; localStorage.setItem("vertTheo", vertTheo); }
+        function plusRougeTheo() { rougeTheo += 1; document.getElementById("rouge-theo").innerText = rougeTheo; localStorage.setItem("rougeTheo", rougeTheo); }
+        function moinsRougeTheo() { rougeTheo -= 1; document.getElementById("rouge-theo").innerText = rougeTheo; localStorage.setItem("rougeTheo", rougeTheo); }
+
+        function plusVertLaïna() { vertLaïna += 1; document.getElementById("vert-laïna").innerText = vertLaïna; localStorage.setItem("vertLaïna", vertLaïna); }
+        function moinsVertLaïna() { vertLaïna -= 1; document.getElementById("vert-laïna").innerText = vertLaïna; localStorage.setItem("vertLaïna", vertLaïna); }
+        function plusRougeLaïna() { rougeLaïna += 1; document.getElementById("rouge-laïna").innerText = rougeLaïna; localStorage.setItem("rougeLaïna", rougeLaïna); }
+        function moinsRougeLaïna() { rougeLaïna -= 1; document.getElementById("rouge-laïna").innerText = rougeLaïna; localStorage.setItem("rougeLaïna", rougeLaïna); }
+
+        function plusVertHadia() { vertHadia += 1; document.getElementById("vert-hadia").innerText = vertHadia; localStorage.setItem("vertHadia", vertHadia); }
+        function moinsVertHadia() { vertHadia -= 1; document.getElementById("vert-hadia").innerText = vertHadia; localStorage.setItem("vertHadia", vertHadia); }
+        function plusRougeHadia() { rougeHadia += 1; document.getElementById("rouge-hadia").innerText = rougeHadia; localStorage.setItem("rougeHadia", rougeHadia); }
+        function moinsRougeHadia() { rougeHadia -= 1; document.getElementById("rouge-hadia").innerText = rougeHadia; localStorage.setItem("rougeHadia", rougeHadia); }
+
+        function plusVertAldric() { vertAldric += 1; document.getElementById("vert-aldric").innerText = vertAldric; localStorage.setItem("vertAldric", vertAldric); }
+        function moinsVertAldric() { vertAldric -= 1; document.getElementById("vert-aldric").innerText = vertAldric; localStorage.setItem("vertAldric", vertAldric); }
+        function plusRougeAldric() { rougeAldric += 1; document.getElementById("rouge-aldric").innerText = rougeAldric; localStorage.setItem("rougeAldric", rougeAldric); }
+        function moinsRougeAldric() { rougeAldric -= 1; document.getElementById("rouge-aldric").innerText = rougeAldric; localStorage.setItem("rougeAldric", rougeAldric); }
+
+        function plusVertCélian() { vertCélian += 1; document.getElementById("vert-célian").innerText = vertCélian; localStorage.setItem("vertCélian", vertCélian); }
+        function moinsVertCélian() { vertCélian -= 1; document.getElementById("vert-célian").innerText = vertCélian; localStorage.setItem("vertCélian", vertCélian); }
+        function plusRougeCélian() { rougeCélian += 1; document.getElementById("rouge-célian").innerText = rougeCélian; localStorage.setItem("rougeCélian", rougeCélian); }
+        function moinsRougeCélian() { rougeCélian -= 1; document.getElementById("rouge-célian").innerText = rougeCélian; localStorage.setItem("rougeCélian", rougeCélian); }
+
+        function plusVertIbrahim() { vertIbrahim += 1; document.getElementById("vert-ibrahim").innerText = vertIbrahim; localStorage.setItem("vertIbrahim", vertIbrahim); }
+        function moinsVertIbrahim() { vertIbrahim -= 1; document.getElementById("vert-ibrahim").innerText = vertIbrahim; localStorage.setItem("vertIbrahim", vertIbrahim); }
+        function plusRougeIbrahim() { rougeIbrahim += 1; document.getElementById("rouge-ibrahim").innerText = rougeIbrahim; localStorage.setItem("rougeIbrahim", rougeIbrahim); }
+        function moinsRougeIbrahim() { rougeIbrahim -= 1; document.getElementById("rouge-ibrahim").innerText = rougeIbrahim; localStorage.setItem("rougeIbrahim", rougeIbrahim); }
+
+        function plusVertHanna() { vertHanna += 1; document.getElementById("vert-hanna").innerText = vertHanna; localStorage.setItem("vertHanna", vertHanna); }
+        function moinsVertHanna() { vertHanna -= 1; document.getElementById("vert-hanna").innerText = vertHanna; localStorage.setItem("vertHanna", vertHanna); }
+        function plusRougeHanna() { rougeHanna += 1; document.getElementById("rouge-hanna").innerText = rougeHanna; localStorage.setItem("rougeHanna", rougeHanna); }
+        function moinsRougeHanna() { rougeHanna -= 1; document.getElementById("rouge-hanna").innerText = rougeHanna; localStorage.setItem("rougeHanna", rougeHanna); }
+
+        function plusVertVictor() { vertVictor += 1; document.getElementById("vert-victor").innerText = vertVictor; localStorage.setItem("vertVictor", vertVictor); }
+        function moinsVertVictor() { vertVictor -= 1; document.getElementById("vert-victor").innerText = vertVictor; localStorage.setItem("vertVictor", vertVictor); }
+        function plusRougeVictor() { rougeVictor += 1; document.getElementById("rouge-victor").innerText = rougeVictor; localStorage.setItem("rougeVictor", rougeVictor); }
+        function moinsRougeVictor() { rougeVictor -= 1; document.getElementById("rouge-victor").innerText = rougeVictor; localStorage.setItem("rougeVictor", rougeVictor); }
+
+        function plusVertLéon() { vertLéon += 1; document.getElementById("vert-léon").innerText = vertLéon; localStorage.setItem("vertLéon", vertLéon); }
+        function moinsVertLéon() { vertLéon -= 1; document.getElementById("vert-léon").innerText = vertLéon; localStorage.setItem("vertLéon", vertLéon); }
+        function plusRougeLéon() { rougeLéon += 1; document.getElementById("rouge-léon").innerText = rougeLéon; localStorage.setItem("rougeLéon", rougeLéon); }
+        function moinsRougeLéon() { rougeLéon -= 1; document.getElementById("rouge-léon").innerText = rougeLéon; localStorage.setItem("rougeLéon", rougeLéon); }
+
+        function plusVertNoah() { vertNoah += 1; document.getElementById("vert-noah").innerText = vertNoah; localStorage.setItem("vertNoah", vertNoah); }
+        function moinsVertNoah() { vertNoah -= 1; document.getElementById("vert-noah").innerText = vertNoah; localStorage.setItem("vertNoah", vertNoah); }
+        function plusRougeNoah() { rougeNoah += 1; document.getElementById("rouge-noah").innerText = rougeNoah; localStorage.setItem("rougeNoah", rougeNoah); }
+        function moinsRougeNoah() { rougeNoah -= 1; document.getElementById("rouge-noah").innerText = rougeNoah; localStorage.setItem("rougeNoah", rougeNoah); }
+
+        function plusVertAntonin() { vertAntonin += 1; document.getElementById("vert-antonin").innerText = vertAntonin; localStorage.setItem("vertAntonin", vertAntonin); }
+        function moinsVertAntonin() { vertAntonin -= 1; document.getElementById("vert-antonin").innerText = vertAntonin; localStorage.setItem("vertAntonin", vertAntonin); }
+        function plusRougeAntonin() { rougeAntonin += 1; document.getElementById("rouge-antonin").innerText = rougeAntonin; localStorage.setItem("rougeAntonin", rougeAntonin); }
+        function moinsRougeAntonin() { rougeAntonin -= 1; document.getElementById("rouge-antonin").innerText = rougeAntonin; localStorage.setItem("rougeAntonin", rougeAntonin); }
+
+        function plusVertLéa() { vertLéa += 1; document.getElementById("vert-léa").innerText = vertLéa; localStorage.setItem("vertLéa", vertLéa); }
+        function moinsVertLéa() { vertLéa -= 1; document.getElementById("vert-léa").innerText = vertLéa; localStorage.setItem("vertLéa", vertLéa); }
+        function plusRougeLéa() { rougeLéa += 1; document.getElementById("rouge-léa").innerText = rougeLéa; localStorage.setItem("rougeLéa", rougeLéa); }
+        function moinsRougeLéa() { rougeLéa -= 1; document.getElementById("rouge-léa").innerText = rougeLéa; localStorage.setItem("rougeLéa", rougeLéa); }
+
+        function plusVertBocar() { vertBocar += 1; document.getElementById("vert-bocar").innerText = vertBocar; localStorage.setItem("vertBocar", vertBocar); }
+        function moinsVertBocar() { vertBocar -= 1; document.getElementById("vert-bocar").innerText = vertBocar; localStorage.setItem("vertBocar", vertBocar); }
+        function plusRougeBocar() { rougeBocar += 1; document.getElementById("rouge-bocar").innerText = rougeBocar; localStorage.setItem("rougeBocar", rougeBocar); }
+        function moinsRougeBocar() { rougeBocar -= 1; document.getElementById("rouge-bocar").innerText = rougeBocar; localStorage.setItem("rougeBocar", rougeBocar); }
+
+        function plusVertMila() { vertMila += 1; document.getElementById("vert-mila").innerText = vertMila; localStorage.setItem("vertMila", vertMila); }
+        function moinsVertMila() { vertMila -= 1; document.getElementById("vert-mila").innerText = vertMila; localStorage.setItem("vertMila", vertMila); }
+        function plusRougeMila() { rougeMila += 1; document.getElementById("rouge-mila").innerText = rougeMila; localStorage.setItem("rougeMila", rougeMila); }
+        function moinsRougeMila() { rougeMila -= 1; document.getElementById("rouge-mila").innerText = rougeMila; localStorage.setItem("rougeMila", rougeMila); }
+
+        function plusVertLina() { vertLina += 1; document.getElementById("vert-lina").innerText = vertLina; localStorage.setItem("vertLina", vertLina); }
+        function moinsVertLina() { vertLina -= 1; document.getElementById("vert-lina").innerText = vertLina; localStorage.setItem("vertLina", vertLina); }
+        function plusRougeLina() { rougeLina += 1; document.getElementById("rouge-lina").innerText = rougeLina; localStorage.setItem("rougeLina", rougeLina); }
+        function moinsRougeLina() { rougeLina -= 1; document.getElementById("rouge-lina").innerText = rougeLina; localStorage.setItem("rougeLina", rougeLina); }
+
+        function sombre() {
+            document.body.classList.toggle("dark");
+            if (document.body.classList.contains("dark")) {
+                localStorage.setItem("etatSombre", "on");
+            } else {
+                localStorage.setItem("etatSombre", "off");
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="prenoms">
+        <div id="points-verts">
+            points verts
+        </div>
+        <div id="points-rouges">
+            points rouges
+        </div>
+        <div>
+            Livia
+            <button type="button" class="moinsRouge" onclick="moinsRougeLivia()">-</button>
+            <span id="rouge-livia" class="compteurRouge">0</span>
+            <button type="button" class="plusRouge" onclick="plusRougeLivia()">+</button>
+            <button type="button" class="moinsVert" onclick="moinsVertLivia()">-</button>
+            <span id="vert-livia" class="compteurVert">0</span>
+            <button type="button" class="plusVert" onclick="plusVertLivia()">+</button>
+        </div>
+        <div>
+            Abdel-Jalil
+            <button type="button" class="moinsRouge" onclick="moinsRougeAbdelJalil()">-</button>
+            <span id="rouge-abdeljalil" class="compteurRouge">0</span>
+            <button type="button" class="plusRouge" onclick="plusRougeAbdelJalil()">+</button>
+            <button type="button" class="moinsVert" onclick="moinsVertAbdelJalil()">-</button>
+            <span id="vert-abdeljalil" class="compteurVert">0</span>
+            <button type="button" class="plusVert" onclick="plusVertAbdelJalil()">+</button>
+        </div>
+        <div>
+            Rayan
+            <button type="button" class="moinsRouge" onclick="moinsRougeRayan()">-</button>
+            <span id="rouge-rayan" class="compteurRouge">0</span>
+            <button type="button" class="plusRouge" onclick="plusRougeRayan()">+</button>
+            <button type="button" class="moinsVert" onclick="moinsVertRayan()">-</button>
+            <span id="vert-rayan" class="compteurVert">0</span>
+            <button type="button" class="plusVert" onclick="plusVertRayan()">+</button>
+        </div>
+        <div>
+            Damien
+            <button type="button" class="moinsRouge" onclick="moinsRougeDamien()">-</button>
+            <span id="rouge-damien" class="compteurRouge">0</span>
+            <button type="button" class="plusRouge" onclick="plusRougeDamien()">+</button>
+            <button type="button" class="moinsVert" onclick="moinsVertDamien()">-</button>
+            <span id="vert-damien" class="compteurVert">0</span>
+            <button type="button" class="plusVert" onclick="plusVertDamien()">+</button>
+        </div>
+        <div>
+            Amine
+            <button type="button" class="moinsRouge" onclick="moinsRougeAmine()">-</button>
+            <span id="rouge-amine" class="compteurRouge">0</span>
+            <button type="button" class="plusRouge" onclick="plusRougeAmine()">+</button>
+            <button type="button" class="moinsVert" onclick="moinsVertAmine()">-</button>
+            <span id="vert-amine" class="compteurVert">0</span>
+            <button type="button" class="plusVert" onclick="plusVertAmine()">+</button>
+        </div>
+        <div>
+            Chloé
+            <button type="button" class="moinsRouge" onclick="moinsRougeChloe()">-</button>
+            <span id="rouge-chloe" class="compteurRouge">0</span>
+            <button type="button" class="plusRouge" onclick="plusRougeChloe()">+</button>
+            <button type="button" class="moinsVert" onclick="moinsVertChloe()">-</button>
+            <span id="vert-chloe" class="compteurVert">0</span>
+            <button type="button" class="plusVert" onclick="plusVertChloe()">+</button>
+        </div>
+        <div>
+            Skander
+            <button type="button" class="moinsRouge" onclick="moinsRougeSkander()">-</button>
+            <span id="rouge-skander" class="compteurRouge">0</span>
+            <button type="button" class="plusRouge" onclick="plusRougeSkander()">+</button>
+            <button type="button" class="moinsVert" onclick="moinsVertSkander()">-</button>
+            <span id="vert-skander" class="compteurVert">0</span>
+            <button type="button" class="plusVert" onclick="plusVertSkander()">+</button>
+        </div>
+        <div>
+            Yasmine
+            <button type="button" class="moinsRouge" onclick="moinsRougeYasmine()">-</button>
+            <span id="rouge-yasmine" class="compteurRouge">0</span>
+            <button type="button" class="plusRouge" onclick="plusRougeYasmine()">+</button>
+            <button type="button" class="moinsVert" onclick="moinsVertYasmine()">-</button>
+            <span id="vert-yasmine" class="compteurVert">0</span>
+            <button type="button" class="plusVert" onclick="plusVertYasmine()">+</button>
+        </div>
+        <div>
+            Stella
+            <button type="button" class="moinsRouge" onclick="moinsRougeStella()">-</button>
+            <span id="rouge-stella" class="compteurRouge">0</span>
+            <button type="button" class="plusRouge" onclick="plusRougeStella()">+</button>
+            <button type="button" class="moinsVert" onclick="moinsVertStella()">-</button>
+            <span id="vert-stella" class="compteurVert">0</span>
+            <button type="button" class="plusVert" onclick="plusVertStella()">+</button>
+        </div>
+        <div>
+            Corentin
+            <button type="button" class="moinsRouge" onclick="moinsRougeCorentin()">-</button>
+            <span id="rouge-corentin" class="compteurRouge">0</span>
+            <button type="button" class="plusRouge" onclick="plusRougeCorentin()">+</button>
+            <button type="button" class="moinsVert" onclick="moinsVertCorentin()">-</button>
+            <span id="vert-corentin" class="compteurVert">0</span>
+            <button type="button" class="plusVert" onclick="plusVertCorentin()">+</button>
+        </div>
+        <div>
+            Ema
+            <button type="button" class="moinsRouge" onclick="moinsRougeEma()">-</button>
+            <span id="rouge-ema" class="compteurRouge">0</span>
+            <button type="button" class="plusRouge" onclick="plusRougeEma()">+</button>
+            <button type="button" class="moinsVert" onclick="moinsVertEma()">-</button>
+            <span id="vert-ema" class="compteurVert">0</span>
+            <button type="button" class="plusVert" onclick="plusVertEma()">+</button>
+        </div>
+        <div>
+            Mamadou
+            <button type="button" class="moinsRouge" onclick="moinsRougeMamadou()">-</button>
+            <span id="rouge-mamadou" class="compteurRouge">0</span>
+            <button type="button" class="plusRouge" onclick="plusRougeMamadou()">+</button>
+            <button type="button" class="moinsVert" onclick="moinsVertMamadou()">-</button>
+            <span id="vert-mamadou" class="compteurVert">0</span>
+            <button type="button" class="plusVert" onclick="plusVertMamadou()">+</button>
+        </div>
+        <div>
+            Marie-Liesse
+            <button type="button" class="moinsRouge" onclick="moinsRougeMarieLiesse()">-</button>
+            <span id="rouge-marieliesse" class="compteurRouge">0</span>
+            <button type="button" class="plusRouge" onclick="plusRougeMarieLiesse()">+</button>
+            <button type="button" class="moinsVert" onclick="moinsVertMarieLiesse()">-</button>
+            <span id="vert-marieliesse" class="compteurVert">0</span>
+            <button type="button" class="plusVert" onclick="plusVertMarieLiesse()">+</button>
+        </div>
+        <div>
+            Jules
+            <button type="button" class="moinsRouge" onclick="moinsRougeJules()">-</button>
+            <span id="rouge-jules" class="compteurRouge">0</span>
+            <button type="button" class="plusRouge" onclick="plusRougeJules()">+</button>
+            <button type="button" class="moinsVert" onclick="moinsVertJules()">-</button>
+            <span id="vert-jules" class="compteurVert">0</span>
+            <button type="button" class="plusVert" onclick="plusVertJules()">+</button>
+        </div>
+        <div>
+            Tim
+            <button type="button" class="moinsRouge" onclick="moinsRougeTim()">-</button>
+            <span id="rouge-tim" class="compteurRouge">0</span>
+            <button type="button" class="plusRouge" onclick="plusRougeTim()">+</button>
+            <button type="button" class="moinsVert" onclick="moinsVertTim()">-</button>
+            <span id="vert-tim" class="compteurVert">0</span>
+            <button type="button" class="plusVert" onclick="plusVertTim()">+</button>
+        </div>
+        <div>
+            Theo
+            <button type="button" class="moinsRouge" onclick="moinsRougeTheo()">-</button>
+            <span id="rouge-theo" class="compteurRouge">0</span>
+            <button type="button" class="plusRouge" onclick="plusRougeTheo()">+</button>
+            <button type="button" class="moinsVert" onclick="moinsVertTheo()">-</button>
+            <span id="vert-theo" class="compteurVert">0</span>
+            <button type="button" class="plusVert" onclick="plusVertTheo()">+</button>
+        </div>
+        <div>
+            Laïna
+            <button type="button" class="moinsRouge" onclick="moinsRougeLaïna()">-</button>
+            <span id="rouge-laïna" class="compteurRouge">0</span>
+            <button type="button" class="plusRouge" onclick="plusRougeLaïna()">+</button>
+            <button type="button" class="moinsVert" onclick="moinsVertLaïna()">-</button>
+            <span id="vert-laïna" class="compteurVert">0</span>
+            <button type="button" class="plusVert" onclick="plusVertLaïna()">+</button>
+        </div>
+        <div>
+            Hadia
+            <button type="button" class="moinsRouge" onclick="moinsRougeHadia()">-</button>
+            <span id="rouge-hadia" class="compteurRouge">0</span>
+            <button type="button" class="plusRouge" onclick="plusRougeHadia()">+</button>
+            <button type="button" class="moinsVert" onclick="moinsVertHadia()">-</button>
+            <span id="vert-hadia" class="compteurVert">0</span>
+            <button type="button" class="plusVert" onclick="plusVertHadia()">+</button>
+        </div>
+        <div>
+            Aldric
+            <button type="button" class="moinsRouge" onclick="moinsRougeAldric()">-</button>
+            <span id="rouge-aldric" class="compteurRouge">0</span>
+            <button type="button" class="plusRouge" onclick="plusRougeAldric()">+</button>
+            <button type="button" class="moinsVert" onclick="moinsVertAldric()">-</button>
+            <span id="vert-aldric" class="compteurVert">0</span>
+            <button type="button" class="plusVert" onclick="plusVertAldric()">+</button>
+        </div>
+        <div>
+            Célian
+            <button type="button" class="moinsRouge" onclick="moinsRougeCélian()">-</button>
+            <span id="rouge-célian" class="compteurRouge">0</span>
+            <button type="button" class="plusRouge" onclick="plusRougeCélian()">+</button>
+            <button type="button" class="moinsVert" onclick="moinsVertCélian()">-</button>
+            <span id="vert-célian" class="compteurVert">0</span>
+            <button type="button" class="plusVert" onclick="plusVertCélian()">+</button>
+        </div>
+        <div>
+            Ibrahim
+            <button type="button" class="moinsRouge" onclick="moinsRougeIbrahim()">-</button>
+            <span id="rouge-ibrahim" class="compteurRouge">0</span>
+            <button type="button" class="plusRouge" onclick="plusRougeIbrahim()">+</button>
+            <button type="button" class="moinsVert" onclick="moinsVertIbrahim()">-</button>
+            <span id="vert-ibrahim" class="compteurVert">0</span>
+            <button type="button" class="plusVert" onclick="plusVertIbrahim()">+</button>
+        </div>
+        <div>
+            Hanna
+            <button type="button" class="moinsRouge" onclick="moinsRougeHanna()">-</button>
+            <span id="rouge-hanna" class="compteurRouge">0</span>
+            <button type="button" class="plusRouge" onclick="plusRougeHanna()">+</button>
+            <button type="button" class="moinsVert" onclick="moinsVertHanna()">-</button>
+            <span id="vert-hanna" class="compteurVert">0</span>
+            <button type="button" class="plusVert" onclick="plusVertHanna()">+</button>
+        </div>
+        <div>
+            Victor
+            <button type="button" class="moinsRouge" onclick="moinsRougeVictor()">-</button>
+            <span id="rouge-victor" class="compteurRouge">0</span>
+            <button type="button" class="plusRouge" onclick="plusRougeVictor()">+</button>
+            <button type="button" class="moinsVert" onclick="moinsVertVictor()">-</button>
+            <span id="vert-victor" class="compteurVert">0</span>
+            <button type="button" class="plusVert" onclick="plusVertVictor()">+</button>
+        </div>
+        <div>
+            Léon
+            <button type="button" class="moinsRouge" onclick="moinsRougeLéon()">-</button>
+            <span id="rouge-léon" class="compteurRouge">0</span>
+            <button type="button" class="plusRouge" onclick="plusRougeLéon()">+</button>
+            <button type="button" class="moinsVert" onclick="moinsVertLéon()">-</button>
+            <span id="vert-léon" class="compteurVert">0</span>
+            <button type="button" class="plusVert" onclick="plusVertLéon()">+</button>
+        </div>
+        <div>
+            Noah
+            <button type="button" class="moinsRouge" onclick="moinsRougeNoah()">-</button>
+            <span id="rouge-noah" class="compteurRouge">0</span>
+            <button type="button" class="plusRouge" onclick="plusRougeNoah()">+</button>
+            <button type="button" class="moinsVert" onclick="moinsVertNoah()">-</button>
+            <span id="vert-noah" class="compteurVert">0</span>
+            <button type="button" class="plusVert" onclick="plusVertNoah()">+</button>
+        </div>
+        <div>
+            Antonin
+            <button type="button" class="moinsRouge" onclick="moinsRougeAntonin()">-</button>
+            <span id="rouge-antonin" class="compteurRouge">0</span>
+            <button type="button" class="plusRouge" onclick="plusRougeAntonin()">+</button>
+            <button type="button" class="moinsVert" onclick="moinsVertAntonin()">-</button>
+            <span id="vert-antonin" class="compteurVert">0</span>
+            <button type="button" class="plusVert" onclick="plusVertAntonin()">+</button>
+        </div>
+        <div>
+            Léa
+            <button type="button" class="moinsRouge" onclick="moinsRougeLéa()">-</button>
+            <span id="rouge-léa" class="compteurRouge">0</span>
+            <button type="button" class="plusRouge" onclick="plusRougeLéa()">+</button>
+            <button type="button" class="moinsVert" onclick="moinsVertLéa()">-</button>
+            <span id="vert-léa" class="compteurVert">0</span>
+            <button type="button" class="plusVert" onclick="plusVertLéa()">+</button>
+        </div>
+        <div>
+            Bocar
+            <button type="button" class="moinsRouge" onclick="moinsRougeBocar()">-</button>
+            <span id="rouge-bocar" class="compteurRouge">0</span>
+            <button type="button" class="plusRouge" onclick="plusRougeBocar()">+</button>
+            <button type="button" class="moinsVert" onclick="moinsVertBocar()">-</button>
+            <span id="vert-bocar" class="compteurVert">0</span>
+            <button type="button" class="plusVert" onclick="plusVertBocar()">+</button>
+        </div>
+        <div>
+            Mila
+            <button type="button" class="moinsRouge" onclick="moinsRougeMila()">-</button>
+            <span id="rouge-mila" class="compteurRouge">0</span>
+            <button type="button" class="plusRouge" onclick="plusRougeMila()">+</button>
+            <button type="button" class="moinsVert" onclick="moinsVertMila()">-</button>
+            <span id="vert-mila" class="compteurVert">0</span>
+            <button type="button" class="plusVert" onclick="plusVertMila()">+</button>
+        </div>
+        <div>
+            Lina
+            <button type="button" class="moinsRouge" onclick="moinsRougeLina()">-</button>
+            <span id="rouge-lina" class="compteurRouge">0</span>
+            <button type="button" class="plusRouge" onclick="plusRougeLina()">+</button>
+            <button type="button" class="moinsVert" onclick="moinsVertLina()">-</button>
+            <span id="vert-lina" class="compteurVert">0</span>
+            <button type="button" class="plusVert" onclick="plusVertLina()">+</button>
+        </div>
+    </div>
+    <button type="button" class="sombre" id="sombre" onclick="sombre()">mode nuit 🌙</button>
+</body>
+</html>
