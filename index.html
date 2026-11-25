@@ -20,6 +20,19 @@
             position: fixed;
             left: 350px;
         }
+        #résultEleve {
+            position: fixed;
+            left: 475px;
+            top: 380px;
+            height: 20px;
+            width: 130px;
+            background-color: var(--bg-color);
+            border: 3px solid var(--input-border);
+            color: var(--text-color);
+            border-radius: 30px;
+            cursor: pointer;
+            text-align: center;
+        }
         #total {
             font-weight: bold;
             position: fixed;
@@ -46,6 +59,18 @@
             height: 20px;
             position: fixed;
             left: 180px;
+            cursor: pointer;
+        }
+        #randomEleve {
+            position: fixed;
+            left: 475px;
+            top: 350px;
+            width: 130;
+            height: 25;
+            background-color: var(--bg-color);
+            border: 3px solid var(--input-border);
+            color: var(--text-color);
+            border-radius: 30px;
             cursor: pointer;
         }
         .moinsVert {
@@ -115,6 +140,44 @@
         }
         .moinsVert:hover {
             background-color: orangered; 
+        }
+        #MisesAJour {
+            font-size: 15px;
+            position: fixed;
+            right: 5px;
+            top: 75px;
+            height: 400px;
+            width: 250px;
+            color: var(--text-color);
+            flex-direction: column;
+            display: flex;
+            background-color: var(--bg-color);
+            border: 5px solid var(--input-border);
+            border-radius: 30px;
+            padding: 30px 20px;
+            gap: 0px;
+        }
+        #upd1 {
+            top: 75px;
+            left: 975px;
+            font-size: 15px;
+            position: fixed;
+            color: var(--text-color);
+            flex-direction: column;
+            display: flex;
+            padding: 30px 20px;
+            gap: 0px;
+        }
+        #upd2 {
+            top: 150px;
+            left: 975px;
+            font-size: 15px;
+            position: fixed;
+            color: var(--text-color);
+            flex-direction: column;
+            display: flex;
+            padding: 30px 20px;
+            gap: 0px;
         }
         .moinsVert:active {
             background-color: salmon;
@@ -236,7 +299,6 @@
             if (etatSombre === "on") {
                 document.body.classList.add("dark");
             }
-
             let totallivia = vertLivia - rougeLivia;
             let totalabdeljalil = vertAbdelJalil - rougeAbdelJalil;
             let totalrayan = vertRayan - rougeRayan;
@@ -545,6 +607,101 @@
                 localStorage.setItem("etatSombre", "on");
             } else {
                 localStorage.setItem("etatSombre", "off");
+            }
+        }
+        let min = 1;
+        let max = 30;
+        function randomEleve() {
+            let EleveRandom = Math.floor(Math.random() * (max - min + 1)) + min;
+            if (EleveRandom === 1) {
+                document.getElementById("résultEleve").innerText = "Livia";
+            }
+            if (EleveRandom === 2) {
+                document.getElementById("résultEleve").innerText = "Abdel-Jalil";
+            }
+            if (EleveRandom === 3) {
+                document.getElementById("résultEleve").innerText = "Rayan";
+            }
+            if (EleveRandom === 4) {
+                document.getElementById("résultEleve").innerText = "Damien";
+            }
+            if (EleveRandom === 5) {
+                document.getElementById("résultEleve").innerText = "Amine";
+            }
+            if (EleveRandom === 6) {
+                document.getElementById("résultEleve").innerText = "Chloé";
+            }
+            if (EleveRandom === 7) {
+                document.getElementById("résultEleve").innerText = "Skander";
+            }
+            if (EleveRandom === 8) {
+                document.getElementById("résultEleve").innerText = "Yasmine";
+            }
+            if (EleveRandom === 9) {
+                document.getElementById("résultEleve").innerText = "Stella";
+            }
+            if (EleveRandom === 10) {
+                document.getElementById("résultEleve").innerText = "Corentin";
+            }
+            if (EleveRandom === 11) {
+                document.getElementById("résultEleve").innerText = "Ema";
+            }
+            if (EleveRandom === 12) {
+                document.getElementById("résultEleve").innerText = "Mamadou";
+            }
+            if (EleveRandom === 13) {
+                document.getElementById("résultEleve").innerText = "Marie-Liesse";
+            }
+            if (EleveRandom === 14) {
+                document.getElementById("résultEleve").innerText = "Jules";
+            }
+            if (EleveRandom === 15) {
+                document.getElementById("résultEleve").innerText = "Tim";
+            }
+            if (EleveRandom === 16) {
+                document.getElementById("résultEleve").innerText = "Theo";
+            }
+            if (EleveRandom === 17) {
+                document.getElementById("résultEleve").innerText = "Laïna";
+            }
+            if (EleveRandom === 18) {
+                document.getElementById("résultEleve").innerText = "Hadia";
+            }
+            if (EleveRandom === 19) {
+                document.getElementById("résultEleve").innerText = "Aldric";
+            }
+            if (EleveRandom === 20) {
+                document.getElementById("résultEleve").innerText = "Célian";
+            }
+            if (EleveRandom === 21) {
+                document.getElementById("résultEleve").innerText = "Ibrahim";
+            }
+            if (EleveRandom === 22) {
+                document.getElementById("résultEleve").innerText = "Hanna";
+            }
+            if (EleveRandom === 23) {
+                document.getElementById("résultEleve").innerText = "Victor";
+            }
+            if (EleveRandom === 24) {
+                document.getElementById("résultEleve").innerText = "Léon";
+            }
+            if (EleveRandom === 25) {
+                document.getElementById("résultEleve").innerText = "Noah";
+            }
+            if (EleveRandom === 26) {
+                document.getElementById("résultEleve").innerText = "Antonin";
+            }
+            if (EleveRandom === 27) {
+                document.getElementById("résultEleve").innerText = "Léa";
+            }
+            if (EleveRandom === 28) {
+                document.getElementById("résultEleve").innerText = "Bocar";
+            }
+            if (EleveRandom === 29) {
+                document.getElementById("résultEleve").innerText = "Mila";
+            }
+            if (EleveRandom === 30) {
+                document.getElementById("résultEleve").innerText = "Lina";
             }
         }
     </script>
@@ -861,6 +1018,18 @@
             <span class="total" id="totallina">0</span>
         </div>
     </div>
-    <button type="button" class="sombre" id="sombre" onclick="sombre()">mode nuit 🌙</button>
+    <button type="button" class="sombre" id="sombre" onclick="sombre()">mode nuit🌙</button>
+    <button type="button" id="randomEleve" onclick="randomEleve()">Eleve au hasard</button>
+    <span id="résultEleve">🎲</span>
+    <div id="MisesAJour">
+        <div id="upd1">
+            <span>18/11/2026</span>
+            <span>Ajout du bouton "Eleve au hasard", qui tire un élève au hasard</span>
+        </div>
+        <div id="upd2">
+            <span>24/11/2026</span>
+            <span>Ajout du panneau des mises a jours.</span>
+        </div>
+    </div>
 </body>
 </html>
